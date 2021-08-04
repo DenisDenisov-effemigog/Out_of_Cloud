@@ -64,12 +64,21 @@ export default {
             this.emailReg = false
             this.errorFlag = false
         },
-        sendMail(){
+        async sendMail(){
             if(this.email.length === 0){
                 this.errorFlag = true
             }else if(!this.validateEmail(this.email)){
                 this.emailReg = true
             }else{
+                fetch('', {
+                    method:"POST",
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: this.email
+                })
+                    .then((response) => console.log(response))
+                    .catch((error) => console.error("error " + error))
                 this.answerFlag = true
                 console.log(this.email);
             }
